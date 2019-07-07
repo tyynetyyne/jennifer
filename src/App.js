@@ -2,6 +2,7 @@ import React from 'react';
 import banner from './Jennifer_banner.png';
 import Songs from './Songs';
 import songsData from './songsData';
+import Section from './Section';
 
 import './App.css';
 
@@ -15,7 +16,7 @@ function App() {
         </p>
       </header>
       <div className="App-container">
-        <Songs songs={songsData}/>
+        <Section title="Jenniferin biisit" component={<Songs songs={songsData}/>} />
       </div>
     </div>
   );
