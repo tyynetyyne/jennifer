@@ -51,7 +51,7 @@
   color: green;
 }
 
-.Songs-verse, .Songs-chorus, .Songs-bridge, .Songs-part-c, .Songs-outro, .Songs-intro {
+.Songs-verse, .Songs-chorus, .Songs-bridge, .Songs-part-c, .Songs-outro, .Songs-intro, .Gigs-song, .Gigs-gig{
   text-align: left;
 }
 
@@ -60,4 +60,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center; 
+}
+
+.Gigs-images-container {
+  display: flex;
+}
+
+.Gigs-img {
+  width: 33%;
 }
