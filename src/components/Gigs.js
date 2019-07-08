@@ -22,10 +22,11 @@ const Gig = ({date, place, playlist, images}) => {
     }
 
     const divStyle = {display: visibility};
-
+    //debugger
     return (
         <div className="Gigs-gig"  onClick={handleClick}>
             <h3>{date} @ {place} </h3>
+
             <div style={divStyle}>
                 <h4>Biisilista</h4>
                 <ol>
@@ -45,10 +46,26 @@ const Gig = ({date, place, playlist, images}) => {
         </div>
 )} 
 
+const isUpcoming = (dateStr) => {
+    const dateNow= new Date();
+    console.log(dateNow, dateStr);
+    const dateArr = dateStr.split(".");
+    const gigDate=new Date(dateArr[2],dateArr[1]-1,dateArr[0],0,0,0);
+    return dateNow.getTime() < gigDate.getTime();
+}
+
 const Gigs = (props) => {
+    const [ showAll, setShowAll ] = useState(true);
+    const handleClick = (evt) => {
+        evt.stopPropagation();
+        setShowAll(!showAll);
+    }
+    const filteredGigs = showAll ? props.gigs : props.gigs.filter(gig => isUpcoming(gig.date));
+    console.log(filteredGigs);
     return (
       <div className="Gigs">
-        {props.gigs.map(gig => {
+        <button onClick={handleClick}>{!showAll ? "Näytä kaikki":"Näytä tulevat"}</button>
+        {filteredGigs.map(gig => {
             return(
             <Gig key={gig.id} place={gig.place} date={gig.date} playlist={gig.playlist} images={gig.images} />
             )})}
