@@ -1,14 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const NewGig = ({gigs, setGigs}) => {
   const [newGig, setNewGig] = useState({place: "", date: "", showtime: "",  link: "", id: null, playlist: [], images:[]});
+    
     const addGig = (evt) => {
       evt.preventDefault();
-      const gigObject = {...newGig, id: gigs.length + 1,
-      }
-      setGigs(gigs.concat(gigObject));
-      setNewGig({place: "", date: "", showtime: "",  link: "", id: null, playlist: [], images:[]});
-    }
+      const gigObject = {...newGig};
+
+      axios
+        .post('http://localhost:3001/gigs', gigObject)
+        .then(response => {
+          setGigs(gigs.concat(response.data))
+          setNewGig({place: "", date: "", showtime: "",  link: "", id: null, playlist: [], images:[]});
+        })
+    } 
+
     const handleGigChange = (evt, type) => {
       setNewGig({...newGig, [type]: evt.target.value});
     }

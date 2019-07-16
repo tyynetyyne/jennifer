@@ -51,6 +51,14 @@
   color: green;
 }
 
+.Songs-read {
+  color: green;
+}
+
+.Songs-unread {
+  color: red;
+}
+
 .Songs-verse, .Songs-chorus, .Songs-bridge, .Songs-part-c, .Songs-outro, .Songs-intro, .Gigs-song, .Gigs-gig{
   text-align: left;
 }
