@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import gigsService from '../services/gigs';
 
 const NewGig = ({gigs, setGigs}) => {
   const [newGig, setNewGig] = useState({place: "", date: "", showtime: "",  link: "", id: null, playlist: [], images:[]});
@@ -8,8 +8,8 @@ const NewGig = ({gigs, setGigs}) => {
       evt.preventDefault();
       const gigObject = {...newGig};
 
-      axios
-        .post('http://localhost:3001/gigs', gigObject)
+      gigsService
+        .create(gigObject)
         .then(response => {
           setGigs(gigs.concat(response.data))
           setNewGig({place: "", date: "", showtime: "",  link: "", id: null, playlist: [], images:[]});

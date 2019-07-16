@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import songsService from '../services/songs'
 
 const fillInLyrics = (lyrics) => {
     return lyrics.map(item => {
@@ -54,17 +54,28 @@ const Song = (props) => {
 )} 
 
 const Songs = (props) => {
+
     const toggleImportanceOf = (evt, id) => {
         evt.stopPropagation();
-        const url = `http://localhost:3001/songs/${id}`
+       // const url = `http://localhost:3001/songs/${id}`
         const song = props.songs.find(n => n.id === id)
         const changedSong = { ...song, read: !song.read }
       
-        axios
-        .put(url, changedSong)
+        songsService
+        .update(id, changedSong)
         .then(response => {
           props.setSongs(props.songs.map(song => song.id !== id ? song : response.data))
         })
+        .catch(error => {
+            // alert(
+            //   `tätä biisiä ei ole enää palvelimella '${song.name}'`
+            // )
+            props.setErrorMessage(`tätä biisiä ei ole enää palvelimella '${song.name}'`);
+            setTimeout(() => {
+                props.setErrorMessage(null)
+              }, 5000)
+            props.setSongs(props.songs.filter(n => n.id !== id))
+          })
       }
     return (
       <div className="Songs-songs">

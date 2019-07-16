@@ -48,6 +48,15 @@
       "id": 4,
       "playlist": [],
       "images": []
+    },
+    {
+      "place": "Jyväskylä",
+      "date": "23.6.2020",
+      "showtime": "",
+      "link": "",
+      "id": 5,
+      "playlist": [],
+      "images": []
     }
   ],
   "songs": [
@@ -100,7 +109,7 @@
     {
       "name": "Aamudarra",
       "id": 1,
-      "read": true,
+      "read": false,
       "lyrics": [
         {
           "type": "verse",

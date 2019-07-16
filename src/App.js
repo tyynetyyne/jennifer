@@ -7,16 +7,18 @@ import AdminSection from './components/AdminSection';
 import NewGig from './components/NewGig';
 import './App.css';
 
-import axios from 'axios';
+import gigsService from './services/gigs';
+import songsService from './services/songs';
 
 function App() {
   const [songs, setSongs] = useState([]);
   const [gigs, setGigs] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const getGigs = () => {
     console.log('effect 1')
-    axios
-      .get('http://localhost:3001/gigs')
+    gigsService
+      .getAll()
       .then(response => {
        // console.log('promise fulfilled')
         setGigs(response.data)
@@ -25,8 +27,8 @@ function App() {
 
   const getSongs = () => {
     console.log('effect 2')
-    axios
-      .get('http://localhost:3001/songs')
+    songsService
+      .getAll()
       .then(response => {
       // console.log('promise fulfilled')
         setSongs(response.data)
@@ -39,6 +41,18 @@ function App() {
   //console.log('render', gigs.length, 'gigs');
   //console.log('render', songs.length, 'songs');
 
+  const Notification = ({ message }) => {
+    if (message === null) {
+      return null
+    }
+  
+    return (
+      <div className="error">
+        {message}
+      </div>
+    )
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -48,9 +62,10 @@ function App() {
         </p>
       </header>
       <div className="App-container">
-        <Section title="Jenniferin biisit" component={<Songs songs={songs} setSongs={setSongs}/>} />
-        <Section title="Keikat" component={<Gigs gigs={gigs}/>} />
-        <AdminSection title="Admin" component={<NewGig gigs={gigs} setGigs={setGigs}/>}/>
+        <Notification message={errorMessage} />
+        <Section title="Jenniferin biisit" component={<Songs songs={songs} setSongs={setSongs} setErrorMessage ={setErrorMessage}/>} />
+        <Section title="Keikat" component={<Gigs gigs={gigs} setErrorMessage ={setErrorMessage}/>} />
+        <AdminSection title="Admin" component={<NewGig gigs={gigs} setGigs={setGigs} setErrorMessage ={setErrorMessage}/>}/>
       </div>
     </div>
   );
