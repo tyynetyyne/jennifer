@@ -63,7 +63,7 @@
     {
       "name": "Hieno nainen",
       "id": 0,
-      "read": false,
+      "read": true,
       "lyrics": [
         {
           "type": "intro",
@@ -109,7 +109,7 @@
     {
       "name": "Aamudarra",
       "id": 1,
-      "read": false,
+      "read": true,
       "lyrics": [
         {
           "type": "verse",
